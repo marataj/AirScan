@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row" style="margin-top: 1rem;">
+  <div class="col-md-10" style="height: 100%; border-radius: 500px; ">
+    {{html|safe}}  
+    
+
+  </div>
+  <div class="col-md-2">
+    <button class="btn-primary" id="checkCoords">Check</button>
+
+  </div>
+
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script src="{% static '\map\js\get_geojson.js' %}"></script>
+{% endblock script %}
+
