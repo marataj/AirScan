@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Scanner{% endblock title %}
+
 {% block content %}
     <div class="row" style="margin-top: 1rem;">
         <div class="col-md-8" style="height: 96vh; ">
@@ -23,6 +25,6 @@
 {% endblock content %}
 
 {% block script %}
-    <script src="{% static '\map\js\get_geojson.js' %}"></script>
+    <script src="{% static '\scanner\js\get_geojson.js' %}"></script>
 {% endblock script %}
 

@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views import View
-from pathlib import Path
 import folium
 from folium.plugins import Draw
 # Create your views here.
@@ -26,5 +24,5 @@ class Map(View):
         html_string = m._repr_html_()
         html_string = html_string.replace("></iframe>", " id='iframik'></iframe>")
         # html_string = m.get_root().render()
-        return render(request, "map.html", {"html": html_string,})
+        return render(request, "scanner.html", {"html": html_string,})
          
