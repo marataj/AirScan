@@ -1,3 +1,6 @@
 .nav-link:hover{
-    background-color: red;
+    background-color: rgba(38, 9, 204, 0.438);
+}
+body {
+    overflow: hidden;
 }

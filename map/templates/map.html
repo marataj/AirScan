@@ -2,22 +2,27 @@
 {% load static %}
 
 {% block content %}
-<div class="row" style="margin-top: 1rem;">
-  <div class="col-md-10" style="height: 100%; border-radius: 500px; ">
-    {{html|safe}}  
-    
+    <div class="row" style="margin-top: 1rem;">
+        <div class="col-md-8" style="height: 96vh; ">
+            {{html|safe}}
+            <div style="background-color: blue; ">
+                <form action="#">
+                  <textarea name="test" id="tsst" cols="30" rows="10">test</textarea>
+                  <input type="text">
+                </form>
+            </div>
 
-  </div>
-  <div class="col-md-2">
-    <button class="btn-primary" id="checkCoords">Check</button>
+        </div>
+        <div class="col-md-1" style="background-color: red;">
+            <button class="btn-primary" id="checkCoords">Check</button>
 
-  </div>
+        </div>
 
-</div>
+    </div>
 
 {% endblock content %}
 
 {% block script %}
-<script src="{% static '\map\js\get_geojson.js' %}"></script>
+    <script src="{% static '\map\js\get_geojson.js' %}"></script>
 {% endblock script %}
 

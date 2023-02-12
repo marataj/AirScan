@@ -6,9 +6,6 @@ import folium
 from folium.plugins import Draw
 # Create your views here.
 
-def HomeView(request):
-    return render(request, "home.html")
-
 
 class Map(View):
     def get(self, request):
