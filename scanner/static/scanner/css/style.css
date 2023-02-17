@@ -1,0 +1,13 @@
+.right-menu {
+    height: 94vh; 
+    width: 40vh; 
+    margin: 3vh; 
+    padding: 1rem; 
+    opacity: 0.9; 
+    border-radius: 10px; 
+}
+
+.map-container {
+    height: 100vh; 
+    padding-left: 8px;
+}

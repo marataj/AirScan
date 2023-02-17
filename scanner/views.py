@@ -1,28 +1,51 @@
 from django.shortcuts import render
 from django.views import View
 import folium
-from folium.plugins import Draw
+from folium.features import CustomIcon
+from opensky_api import OpenSkyApi
+from utils.map_utils import (
+    bbox_parse,
+    validate_latitude,
+    validate_longitude,
+    generate_generic_map,
+    add_plane_marker
+)
+import json
+import os
+
 # Create your views here.
 
 
-class Map(View):
+OPENSKY_USERNAME = os.getenv("OPENSKY_USERNAME")
+OPENSKY_PASSWORD = os.getenv("OPENSKY_PASSWORD")
+
+
+class Scanner(View):
     def get(self, request):
-        m = folium.Map(location=[41.157944, -8.629105], width='100%', height='100%', zoom_start=12, tiles="OpenStreetMap" )
-        Draw(
-        export=False,
-        filename="my_data.geojson",
-        position="topleft",
-        draw_options={"polyline": False,
-        "polygon": False,
-        "circle": False,
-        "marker": False,
-        "circlemarker": False
-        },
-        edit_options={"edit": False},
-        ).add_to(m)
-        m.render()
-        html_string = m._repr_html_()
-        html_string = html_string.replace("></iframe>", " id='iframik'></iframe>")
-        # html_string = m.get_root().render()
-        return render(request, "scanner.html", {"html": html_string,})
-         
+        _, map_html = generate_generic_map()
+        return render(
+            request,
+            "scanner.html",
+            {"html": map_html},
+        )
+
+    def post(self, request):
+        open_sky = OpenSkyApi(OPENSKY_USERNAME, OPENSKY_PASSWORD)
+        areas = json.loads(request.POST["scanning_area"])
+        map_info = json.loads(request.POST["map_info"])
+        flights = open_sky.get_states(bbox=bbox_parse(areas))
+        map, _ = generate_generic_map(
+            map_info["lat"], map_info["lng"], map_info["zoom"]
+        )
+
+        for flight in flights.states:            
+            map=add_plane_marker(map, flight.latitude, flight.longitude, flight.icao24)
+        
+        map.render()
+        map_html = map._repr_html_()
+
+        return render(
+            request,
+            "scanner.html",
+            {"html": map_html},
+        )

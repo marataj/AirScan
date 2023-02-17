@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import Map
+from .views import Scanner
 
 urlpatterns = [
-    path("", Map.as_view(), name="scanning_page"),
+    path("", Scanner.as_view(), name="scanning_page"),
 ]
