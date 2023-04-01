@@ -1,13 +1,26 @@
 .right-menu {
     height: 94vh; 
     width: 40vh; 
-    margin: 3vh; 
-    padding: 1rem; 
+    margin: 5px; 
+    padding-left: 10px; 
+    padding-right: 10px; 
     opacity: 0.9; 
     border-radius: 10px; 
+    overflow-y: auto;
+    scrollbar-width: 0px;
 }
 
 .map-container {
     height: 100vh; 
     padding-left: 8px;
+}
+.right-menu::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.submit-button{
+    background-color: rgba(255, 233, 233, 0.438);
+}
+.submit-button:hover{
+    background-color: rgba(255, 170, 170, 0.438);
 }

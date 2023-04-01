@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.views import View
-import folium
-from folium.features import CustomIcon
 from opensky_api import OpenSkyApi
 from utils.map_utils import (
     bbox_parse,
@@ -47,5 +45,6 @@ class Scanner(View):
         return render(
             request,
             "scanner.html",
-            {"html": map_html},
+            {"html": map_html,
+            "flights_list": flights.states},
         )

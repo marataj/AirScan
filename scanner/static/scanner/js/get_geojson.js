@@ -27,4 +27,8 @@ function getMapInfo() {
   map_info_field.value=JSON.stringify(map_info)
 }
 
-//TODO: window.frames["0"].drawnItems._map.setView([10,1], 9) ----> function that changes map center with possible zoom animation
+function change_map_center(lon, lat, zoom) {
+  map=window.frames["0"].drawnItems._map
+  map.setView([lon,lat], zoom)
+}
+

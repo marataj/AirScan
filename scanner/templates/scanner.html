@@ -8,13 +8,17 @@
         <div class="col-md-12 map-container">
             {{html|safe}}
         </div>
-        <div class="position-absolute top-0 end-0 bg-dark right-menu">
+        <div class="container position-absolute top-0 end-0 bg-dark right-menu">
             <form action="{% url 'scanning_page' %}" method="POST" id="scanning_form">
                 {% csrf_token %}
                 <input type="hidden" id="scanning_area" name = "scanning_area">
                 <input type="hidden" id="map_info" name = "map_info">
             </form>
-            <button class="form-control" type="button" id="submit_scanner">Submit</button>
+            <button class="form-control submit-button" type="button" id="submit_scanner">Scan</button>
+            {% for flight in flights_list %}
+            {% include "state_vector.html" with flight=flight%}
+            {% endfor %}
+            
         </div>
     </div>
 {% endblock content %}

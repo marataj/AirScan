@@ -1,0 +1,16 @@
+<div class="container state-vector">
+    <div class="row"> 
+        <div class="col-sm">
+            <p>Aircraft no.: {{flight.callsign}}</p>
+            <p>Country: {{flight.origin_country}}</p>            
+            <p>Aircraft category: {{flight.category}}</p>
+        </div>
+        <div class="col-sm">
+            <p>On ground?: {{flight.on_ground}}</p>
+            <p>Altitude: {{flight.baro_altitude}}</p>
+            <p>Velocity: {{flight.velocity}}</p>
+        </div>
+    </div>
+<button onclick="change_map_center({{flight.latitude}}, {{flight.longitude}}, 12)">Position</button>
+<button>Details</button>
+</div>
