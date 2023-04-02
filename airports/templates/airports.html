@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Airports{% endblock title %}
+{% block head %}<link rel="stylesheet" href={% static 'scanner/css/style.css' %}>{% endblock head %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 map-container">
+            {{html|safe}}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}
+

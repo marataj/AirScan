@@ -1,9 +1,11 @@
-import folium
-from folium.plugins import Draw
-from folium.features import CustomIcon
-from typing import Optional, Tuple
-from AirScan.settings import BASE_DIR
 from pathlib import Path
+from typing import Optional, Tuple
+
+import folium
+from folium.features import CustomIcon
+from folium.plugins import Draw
+
+from AirScan.settings import BASE_DIR
 
 
 def validate_latitude(lat: float) -> float:
@@ -97,5 +99,18 @@ def add_plane_marker(
             icon_image=str(Path(BASE_DIR, "static/images/plane.png")),
             icon_size=(30, 30),
         ),
+    ).add_to(map)
+    return map
+
+
+def add_airport_marker(
+    map: folium.Map, lat: float, lng: float, popup_msg: str
+) -> folium.Map:
+    folium.Marker(
+        location=[
+            validate_latitude(lat),
+            validate_longitude(lng),
+        ],
+        popup=popup_msg,
     ).add_to(map)
     return map
