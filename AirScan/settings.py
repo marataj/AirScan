@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'scanner',
     'home',
-    "airports"
+    "airports",
+    "airplanes"
 ]
 
 MIDDLEWARE = [
