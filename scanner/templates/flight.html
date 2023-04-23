@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Flight number / plane name{% endblock title %}
+{% block head %}<link rel="stylesheet" href={% static 'scanner/css/style.css' %}>{% endblock head %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 map-container">
+            <div class="row">
+                {{html|safe}}
+            </div>
+            <div class="row">
+
+            </div>
+            
+        </div>
+        <div class="col-md-6 map-container">
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+        
+    </div>
+{% endblock content %}
+
+{% block script %}
+   
+{% endblock script %}

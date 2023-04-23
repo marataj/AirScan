@@ -53,3 +53,29 @@ class Scanner(View):
             "scanner.html",
             {"html": map_html, "flights_list": flights.states},
         )
+
+class Flight(View):
+    """
+    Class representing the view displaying single flight information.
+
+    """
+
+    def get(self, request, **kwargs):
+        flight = kwargs["flight"]
+        flight_fields=flight.split(",")
+        translation_tabele=[("'","\""),("False","false"),("True","true"),("None", "null")]
+        for pair in translation_tabele:
+            flight=flight.replace(*pair)
+        flight=json.loads(flight)
+        map, _ = generate_generic_map(flight["latitude"], flight["longitude"])
+        map = add_plane_marker(
+                map, flight["latitude"], flight["longitude"], flight["true_track"], flight["icao24"]
+            )
+        map.render()
+        map_html = map._repr_html_()
+
+        return render(
+            request,
+            "flight.html",
+            {"html": map_html},
+        )

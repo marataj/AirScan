@@ -13,5 +13,5 @@
         </div>
     </div>
 <button class="btn-light" onclick="change_map_center({{flight.latitude}}, {{flight.longitude}}, 12)">Position</button>
-<button class="btn-light">Details</button>
+<button class="btn-light"><a href="{% url 'flight' flight=flight %}">Details</a></button>
 </div>
