@@ -1,8 +1,11 @@
-from django.core.management.base import BaseCommand, CommandParser
-from typing import Optional, Any
-import pandas as pd
-from ...models import AirplaneModel
 from pathlib import Path
+from typing import Any, Optional
+
+import pandas as pd
+from django.core.management.base import BaseCommand, CommandParser
+
+from ...models import AirplaneModel
+
 
 class Command(BaseCommand):
     def add_arguments(self, parser: CommandParser) -> None:
@@ -10,8 +13,25 @@ class Command(BaseCommand):
             "path", type=str, help="Path to the csv file with airports data"
         )
 
+    # TODO: put the input files in the specific place in the docker container, base command on that file
     def push_records(self, file_path: Path) -> None:
+        """
+        Function responsible for filling the initial records of the airplanes table in DB from specific csv file.
+        https://opensky-network.org/aircraft-database
 
+        Parameters
+        ----------
+        file_path : Path
+            Path to the csv airplanes database.
+
+        Raises
+        ------
+        FileNotFoundError
+            Raises when the file was not found.
+        TypeError
+            Raises when the file is no of type csv.
+
+        """
         if not file_path.exists():
             raise FileNotFoundError("File not exist")
         if not file_path.suffix == ".csv":
@@ -20,21 +40,20 @@ class Command(BaseCommand):
             file_path,
             usecols=AirplaneModel.get_fields_names()[1:],
         )
-        airplanes.categoryDescription=airplanes.categoryDescription.astype("category")
-        airplanes.manufacturername=airplanes.manufacturername.astype("category")
-        airplanes.operator=airplanes.operator.astype("category")
-        airplanes.owner=airplanes.owner.astype("category")  
-        
-        for airplane in airplanes.iterrows():
-            try:
-                airplane=airplane[1]
-                db_record=AirplaneModel()
-                for field in AirplaneModel.get_fields_names()[1:]:
-                    db_record.__setattr__(field, airplane[field])
-                db_record.save()
-            except TypeError:
-                continue
-        
+        airplanes.categoryDescription = airplanes.categoryDescription.astype("category")
+        airplanes.manufacturername = airplanes.manufacturername.astype("category")
+        airplanes.operator = airplanes.operator.astype("category")
+        airplanes.owner = airplanes.owner.astype("category")
+        airplanes.dropna(subset=["icao24"], axis=0)
+
+        # TODO: replace hardcoding with global parameters
+        airplanes.to_sql(
+            "airplanes_db",
+            "postgresql://postgres:root@localhost/airscan",
+            if_exists="replace",
+            index=False,
+        )
+
     def handle(self, *args: Any, **options: Any) -> Optional[str]:
         csv_path = Path(options["path"])
         self.push_records(csv_path)

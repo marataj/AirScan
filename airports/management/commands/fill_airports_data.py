@@ -3,8 +3,6 @@ from pathlib import Path
 import pandas as pd
 from django.core.management.base import BaseCommand, CommandParser
 
-from ...models import Airports, model_key_map
-
 
 class Command(BaseCommand):
     """
@@ -21,7 +19,6 @@ class Command(BaseCommand):
         """
         Method responsible for filling the `Airports` model with records from airports.csv, downloaded from https://ourairports.com/data/.
         For shorten the process of adding new records, only the large airports are adding to the DB.
-        #TODO: doublecheck large airports
 
         Parameters
         ----------
@@ -41,18 +38,20 @@ class Command(BaseCommand):
         if not file_path.suffix == ".csv":
             raise TypeError("File must be of type csv")
         airports_frame = pd.read_csv(file_path)
-        for i in airports_frame.loc[airports_frame.type == "large_airport"].iterrows():
-            csv_record = i[1]
-            db_record = Airports()
-            for csv_key, db_key in model_key_map.items():
-                if db_key == "scheduled_service":
-                    db_record.__setattr__(
-                        db_key, True if csv_record[csv_key] == "yes" else False
-                    )
-                    continue
-                db_record.__setattr__(db_key, csv_record[csv_key])
-
-            db_record.save()
+        # Due to lot of data, only large airports were chosen to the developing stage.
+        # airports_frame=airports_frame.loc[(airports_frame.type == "large_airport") | (airports_frame.type == "medium_airport") ....]
+        airports_frame = airports_frame.loc[airports_frame.type == "large_airport"]
+        airports_frame.dropna(
+            subset=["latitude_deg", "longitude_deg", "ident"], axis=0, inplace=True
+        )
+        airports_frame.drop(axis=1, labels=["id", "scheduled_service"], inplace=True)
+        # TODO: replace hardcoding with global parameters
+        airports_frame.to_sql(
+            "airports_db",
+            "postgresql://postgres:root@localhost/airscan",
+            if_exists="replace",
+            index=False,
+        )
 
     def handle(self, *args, **options) -> None:
         csv_path = Path(options["path"])

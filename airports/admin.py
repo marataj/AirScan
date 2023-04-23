@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Airports
+from .models import AirportsModel
 # Register your models here.
 
-admin.site.register(Airports)
+admin.site.register(AirportsModel)
