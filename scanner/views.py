@@ -9,8 +9,6 @@ from utils.map_utils import (
     add_plane_marker,
     bbox_parse,
     generate_generic_map,
-    validate_latitude,
-    validate_longitude,
 )
 
 # Create your views here.
@@ -21,6 +19,10 @@ OPENSKY_PASSWORD = os.getenv("OPENSKY_PASSWORD")
 
 
 class Scanner(View):
+    """
+    Class represents the scanning page.
+
+    """
     def get(self, request):
         _, map_html = generate_generic_map()
         return render(

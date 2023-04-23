@@ -10,7 +10,7 @@ from .models import AirportsModel
 
 class AirportsView(View):
     def get(self, request):
-        map, _ = generate_generic_map()
+        map, _ = generate_generic_map(draw=False)
         airports = AirportsModel.objects.all()
         for airport in airports:
             map = add_airport_marker(
