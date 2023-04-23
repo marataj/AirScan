@@ -1,15 +1,17 @@
+import json
+import os
+
 from django.shortcuts import render
 from django.views import View
 from opensky_api import OpenSkyApi
+
 from utils.map_utils import (
+    add_plane_marker,
     bbox_parse,
+    generate_generic_map,
     validate_latitude,
     validate_longitude,
-    generate_generic_map,
-    add_plane_marker
 )
-import json
-import os
 
 # Create your views here.
 
@@ -36,15 +38,16 @@ class Scanner(View):
             map_info["lat"], map_info["lng"], map_info["zoom"]
         )
 
-        for flight in flights.states:            
-            map=add_plane_marker(map, flight.latitude, flight.longitude, flight.icao24)
-        
+        for flight in flights.states:
+            map = add_plane_marker(
+                map, flight.latitude, flight.longitude, flight.true_track, flight.icao24
+            )
+
         map.render()
         map_html = map._repr_html_()
 
         return render(
             request,
             "scanner.html",
-            {"html": map_html,
-            "flights_list": flights.states},
+            {"html": map_html, "flights_list": flights.states},
         )
