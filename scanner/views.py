@@ -5,11 +5,8 @@ from django.shortcuts import render
 from django.views import View
 from opensky_api import OpenSkyApi
 
-from utils.map_utils import (
-    add_plane_marker,
-    bbox_parse,
-    generate_generic_map,
-)
+from flights.models import DestinationsModel
+from utils.map_utils import add_plane_marker, bbox_parse, generate_generic_map
 
 # Create your views here.
 
@@ -18,11 +15,12 @@ OPENSKY_USERNAME = os.getenv("OPENSKY_USERNAME")
 OPENSKY_PASSWORD = os.getenv("OPENSKY_PASSWORD")
 
 
-class Scanner(View):
+class ScannerView(View):
     """
     Class represents the scanning page.
 
     """
+
     def get(self, request):
         _, map_html = generate_generic_map()
         return render(
@@ -41,6 +39,11 @@ class Scanner(View):
         )
 
         for flight in flights.states:
+            dest = DestinationsModel.objects.filter(
+                callsign=str(flight.callsign.strip())
+            )
+            flight.origin = dest[0].origin if len(dest) != 0 else None
+            flight.destination = dest[0].destination if len(dest) != 0 else None
             map = add_plane_marker(
                 map, flight.latitude, flight.longitude, flight.true_track, flight.icao24
             )
@@ -52,30 +55,4 @@ class Scanner(View):
             request,
             "scanner.html",
             {"html": map_html, "flights_list": flights.states},
-        )
-
-class Flight(View):
-    """
-    Class representing the view displaying single flight information.
-
-    """
-
-    def get(self, request, **kwargs):
-        flight = kwargs["flight"]
-        flight_fields=flight.split(",")
-        translation_tabele=[("'","\""),("False","false"),("True","true"),("None", "null")]
-        for pair in translation_tabele:
-            flight=flight.replace(*pair)
-        flight=json.loads(flight)
-        map, _ = generate_generic_map(flight["latitude"], flight["longitude"])
-        map = add_plane_marker(
-                map, flight["latitude"], flight["longitude"], flight["true_track"], flight["icao24"]
-            )
-        map.render()
-        map_html = map._repr_html_()
-
-        return render(
-            request,
-            "flight.html",
-            {"html": map_html},
         )

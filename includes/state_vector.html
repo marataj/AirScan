@@ -1,17 +1,24 @@
 {% load airplane_extras %}
 <div class="container state-vector">
-    <div class="row"> 
+    <div class="row">
         <div class="col-sm">
             <p>Aircraft no.: {{flight.icao24}}</p>
-            <p>Country: {{flight.origin_country}}</p>            
+            <p>Country: {{flight.origin_country}}</p>
             <p>Aircraft category: {{flight.category | to_category}}</p>
+            <P>Callsign: {{flight.callsign}}</P>
         </div>
         <div class="col-sm">
             <p>On ground?: {{flight.on_ground}}</p>
             <p>Altitude: {{flight.baro_altitude}}</p>
             <p>Velocity: {{flight.velocity}}</p>
+            {% if flight.origin and flight.destination %}
+                <p>Origin: {{flight.origin}}</p>
+                <p>Destination: {{flight.destination}}</p>
+            {% else %}
+                <p style="color: darkred;">Route not available</p>
+            {% endif %}
         </div>
     </div>
-<button class="btn-light" onclick="change_map_center({{flight.latitude}}, {{flight.longitude}}, 12)">Position</button>
-<button class="btn-light"><a href="{% url 'flight' flight=flight %}">Details</a></button>
+    <button class="btn-light" onclick="change_map_center({{flight.latitude}}, {{flight.longitude}}, 12)">Position</button>
+    <button class="btn-light"><a href="{% url 'flight_overview' flight=flight %}">Details</a></button>
 </div>

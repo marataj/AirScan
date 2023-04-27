@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'scanner',
     'home',
     "airports",
-    "airplanes"
+    "airplanes",
+    "flights"
 ]
 
 MIDDLEWARE = [
