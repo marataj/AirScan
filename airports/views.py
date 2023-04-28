@@ -5,14 +5,16 @@ from utils.map_utils import add_airport_marker, generate_generic_map
 
 from .models import AirportsModel
 
-# Create your views here.
-
 
 class AirportsView(View):
+    """
+    Class represents the AirportsView.
+
+    """
+
     def get(self, request):
         map, _ = generate_generic_map(draw=False)
-        airports = AirportsModel.objects.all()
-        for airport in airports:
+        for airport in AirportsModel.objects.filter(type="large_airport"):
             map = add_airport_marker(
                 map, airport.latitude_deg, airport.longitude_deg, airport
             )
