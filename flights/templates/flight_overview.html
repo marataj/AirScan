@@ -1,35 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load airplane_extras %}
 
-{% block title %}Flight number / plane name{% endblock title %}
-{% block head %}<link rel="stylesheet" href={% static 'scanner/css/style.css' %}>{% endblock head %}
+
+{% block title %}{{flight.callsign}} / {{flight.icao24}}{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href={% static 'scanner/css/style.css' %}>
+    <link rel="stylesheet" href={% static 'flights/css/style.css' %}>
+{% endblock head %}
 {% block content %}
     <div class="row">
-        <div class="col-md-6 map-container">
-            <div class="row" style="padding: 20px;">
-                {{html|safe}}
-            </div>
-            <div class="row" style="padding: 20px;">
-                <h1>Flight information</h1>
-                <p>Aircraft no.: {{flight.icao24}}</p>
-                <p>Country: {{flight.origin_country}}</p>
-                <p>Aircraft category: {{flight.category | to_category}}</p>
-                <P>Callsign: {{flight.callsign}}</P>
-
-                <p>On ground?: {{flight.on_ground}}</p>
-                <p>Altitude: {{flight.baro_altitude}}</p>
-                <p>Velocity: {{flight.velocity}}</p>
-                {% if flight.origin and flight.destination %}
-                    <p>Origin: {{flight.origin}}</p>
-                    <p>Destination: {{flight.destination}}</p>
-                {% else %}
-                    <p style="color: darkred;">Route not available</p>
-                {% endif %}
-
-            </div>
-
+        <div class="col-md-6 map-container" style="padding: 10px;">
+            {% include "flight_card.html" with flight=flight html=html origin_airport=origin_airport destination_airport=destination_airport%}
         </div>
+
         <div class="col-md-6 map-container">
             <div class="row" style="padding: 20px;">
                 {% if photo %}

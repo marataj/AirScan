@@ -1,0 +1,14 @@
+.flight-card {
+    border-radius: 40px; 
+    height: 96vh; 
+    background-color: rgba(193, 181, 242, 0.438);
+}
+
+.red-mes {
+    color: darkred; 
+    text-align: center;
+}
+
+.flight-data {
+    padding-left: 20px;
+}

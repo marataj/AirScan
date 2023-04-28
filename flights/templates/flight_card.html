@@ -1,0 +1,69 @@
+{% load airplane_extras %}
+<div class="flight-card">
+    <div class="row" style="padding: 20px;">
+        {{html|safe}}
+    </div>
+    <div class="row">
+        <div class="row" style="padding-bottom: 10px;">
+            {% if flight.origin and flight.destination %}
+                <div class="col-md-4" style="text-align: center;">
+                    <h2>FROM</h2>
+                    <h2><a href="#">{{origin_airport.municipality}}({{origin_airport.ident}})</a></h2>
+                </div>
+                <div class="col-md-4" style="text-align:center;">
+                    <span style="font-size:8ch;">&xrarr;</span>
+                </div>
+                <div class="col-md-4" style="text-align: center;">
+                    <h2>DESTINATION</h2>
+                    <h2><a href="#">{{destination_airport.municipality}}({{destination_airport.ident}})</a></h2>
+                </div>
+            {% else %}
+                <h1 class="red-mes">Route not available</h1>
+            {% endif %}
+        </div>
+
+
+        <div class="row flight-data">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md"><h3>Callsign:</h3></div>
+                    <div class="col-md"><h3>{{flight.callsign}}</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md"><h3>Aircraft no.:</h3></div>
+                    <div class="col-md"><h3>{{flight.icao24}}</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md"><h3>Aircraft type:</h3></div>
+                    <div class="col-md"><h3>{{flight.category | to_category}}</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md"><h3>On gorund?:</h3></div>
+                    <div class="col-md"><h3>{{flight.on_ground}}</h3></div>
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md"><h3>Longitude:</h3></div>
+                    <div class="col-md"><h3>{{flight.longitude}}</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md"><h3>Latitude:</h3></div>
+                    <div class="col-md"><h3>{{flight.latitude}}</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md"><h3>Altitude:</h3></div>
+                    <div class="col-md"><h3>{{flight.baro_altitude}}</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md"><h3>Velocity:</h3></div>
+                    <div class="col-md"><h3>{{flight.velocity}}</h3></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

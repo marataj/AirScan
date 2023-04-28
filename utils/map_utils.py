@@ -189,7 +189,7 @@ def add_plane_marker(
             border_width=1,
             text_color="#003EFF",
             inner_icon_style="margin:0px;font-size:2em;transform: rotate({0}deg);".format(
-                angle
+                angle-90
             ),
         ),
     ).add_to(map)
