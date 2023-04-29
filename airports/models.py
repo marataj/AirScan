@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -32,3 +33,6 @@ class AirportsModel(models.Model):
 
     def __str__(self) -> str:
         return str(self.name) + "; " + str(self.iso_country)
+
+    def get_absolute_url(self):
+        return reverse("airport_details", kwargs={"pk": self.pk})

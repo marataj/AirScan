@@ -8,14 +8,14 @@
             {% if flight.origin and flight.destination %}
                 <div class="col-md-4" style="text-align: center;">
                     <h2>FROM</h2>
-                    <h2><a href="#">{{origin_airport.municipality}}({{origin_airport.ident}})</a></h2>
+                    <h2><a href="{{origin_airport.get_absolute_url}}">{{origin_airport.municipality}}({{origin_airport.ident}})</a></h2>
                 </div>
                 <div class="col-md-4" style="text-align:center;">
                     <span style="font-size:8ch;">&xrarr;</span>
                 </div>
                 <div class="col-md-4" style="text-align: center;">
                     <h2>DESTINATION</h2>
-                    <h2><a href="#">{{destination_airport.municipality}}({{destination_airport.ident}})</a></h2>
+                    <h2><a href="{{destination_airport.get_absolute_url}}">{{destination_airport.municipality}}({{destination_airport.ident}})</a></h2>
                 </div>
             {% else %}
                 <h1 class="red-mes">Route not available</h1>

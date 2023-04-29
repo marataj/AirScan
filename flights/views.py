@@ -41,12 +41,14 @@ class FlightView(View):
                 origin_airport.latitude_deg,
                 origin_airport.longitude_deg,
                 origin_airport.municipality,
+                origin_airport.ident
             )
             map = add_airport_marker(
                 map,
                 destination_airport.latitude_deg,
                 destination_airport.longitude_deg,
                 destination_airport.municipality,
+                destination_airport.ident
             )
             PolyLine(
                 [

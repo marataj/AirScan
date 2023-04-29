@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Airport takie i takie{% endblock title %}
+{% block head %}<link rel="stylesheet" href={% static 'scanner/css/style.css' %}>{% endblock head %}
+{% block content %}
+    <div class="data-card" style="margin: 10px;">
+        <div class="row">
+
+            <div class="col-md-4" style="padding: 30px;">
+                <h1>{{object.name}} | {{object.municipality}}</h1>
+                <h3>{{object.ident}}</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6"><h3>Type:</h3></div>
+                    <div class="col-md-6"><h3>{{object.type|upper}}</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"><h3>Latitude:</h3></div>
+                    <div class="col-md-6"><h3>{{object.latitude_deg}}</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"><h3>Longitude:</h3></div>
+                    <div class="col-md-6"><h3>{{object.longitude_deg}}</h3></div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 30px;">
+                {{html|safe}}
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-4" style="padding: 30px;">
+                <h2><a href="{{object.home_link}}">Airport home page</a></h2>
+                <h3><a href="{{object.wikipedia_link}}">Wikipedia page</a></h3>
+            </div>
+            <div class="col-md-8" style="padding: 30px;">
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

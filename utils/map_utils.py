@@ -189,7 +189,7 @@ def add_plane_marker(
             border_width=1,
             text_color="#003EFF",
             inner_icon_style="margin:0px;font-size:2em;transform: rotate({0}deg);".format(
-                angle-90
+                angle - 90
             ),
         ),
     ).add_to(map)
@@ -197,7 +197,7 @@ def add_plane_marker(
 
 
 def add_airport_marker(
-    map: folium.Map, lat: float, lng: float, popup_msg: str
+    map: folium.Map, lat: float, lng: float, popup_msg: str, ident: str
 ) -> folium.Map:
     """
     Utility function that adds the markers of the airport to the passed folium map.
@@ -219,11 +219,16 @@ def add_airport_marker(
     folium.Map
         Map with new marker added.
     """
+    popup = f"""
+    <a href="airport/{ident}" target="_blank">
+        {popup_msg}
+    </a>
+    """
     folium.Marker(
         location=[
             validate_latitude(lat),
             validate_longitude(lng),
         ],
-        popup=popup_msg,
+        popup=popup,
     ).add_to(map)
     return map
