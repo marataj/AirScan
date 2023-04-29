@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %}{{flight.callsign}} / {{flight.icao24}}{% endblock title %}
+{% block title %}Flight no. {{flight.callsign}} / {{flight.icao24}}{% endblock title %}
 {% block head %}
     <link rel="stylesheet" href={% static 'scanner/css/style.css' %}>
     <link rel="stylesheet" href={% static 'flights/css/style.css' %}>
@@ -13,32 +13,8 @@
             {% include "flight_card.html" with flight=flight html=html origin_airport=origin_airport destination_airport=destination_airport%}
         </div>
 
-        <div class="col-md-6 map-container">
-            <div class="row" style="padding: 20px;">
-                {% if photo %}
-                    <img src="{{photo}}" alt="">
-                {% else %}
-                    <img src={% static 'images/no_image.png' %} alt="" style="height: 600px; width: 600px;">
-                {% endif %}
-
-
-            </div>
-            <div class="row" style="padding: 20px;">
-                <h1>
-                    Aircraft information:
-                </h1>
-                {% if airplane_details %}
-                    <p>Registration: {{airplane_details.registration}}</p>
-                    <p>Manufacturer name: {{airplane_details.manufacturername}}</p>
-                    <p>Model: {{airplane_details.model}}</p>
-                    <p>Serial number: {{airplane_details.serialnumber}}</p>
-                    <p>Operator: {{airplane_details.operator}}</p>
-                    <p>Owner: {{airplane_details.owner}}</p>
-                    <p>Category: {{airplane_details.categoryDescription}}</p>
-                {% else %}
-                    <p style="color: darkred; font-weight: bold;">Lack of aircraft information</p>
-                {% endif %}
-            </div>
+        <div class="col-md-6 map-container" style="padding: 10px;">
+            {% include "airplane_card.html" with photo=photo airplane_details=airplane_details%}
         </div>
 
     </div>

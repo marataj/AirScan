@@ -1,0 +1,62 @@
+{% load static %}
+
+<div class="data-card">
+    <h1 style="text-align: center;">{{airplane_details.manufacturername}}: {{airplane_details.model}}</h1>
+    <div class="row" style="padding: 20px;">
+        {% if photo %}
+            <img src="{{photo}}" alt="Plane" style="height: 550px; width:auto; margin-left: auto; margin-right: auto;" class="center">
+        {% else %}
+            <img src={% static 'images/no_image.png' %} alt="" style="height: 400px; width: 400px;">
+        {% endif %}
+
+
+    </div>
+    <div class="row" style="padding: 20px;">
+        {% if airplane_details %}
+
+            <div class="row card-padding">
+                <div class="col-md-6">
+                    <div class="row card-margin-bot" >
+                        <div class="col-md"><h3>Icao24:</h3></div>
+                        <div class="col-md"><h3>{{airplane_details.icao24}}</h3></div>
+                    </div>
+                    <div class="row card-margin-bot">
+                        <div class="col-md"><h3>Registration:</h3></div>
+                        <div class="col-md"><h3>{{airplane_details.registration}}</h3></div>
+                    </div>
+                    <div class="row card-margin-bot">
+                        <div class="col-md"><h3>Manufacturer name:</h3></div>
+                        <div class="col-md"><h3>{{airplane_details.manufacturername}}</h3></div>
+                    </div>
+                    <div class="row card-margin-bot">
+                        <div class="col-md"><h3>Model:</h3></div>
+                        <div class="col-md"><h3>{{airplane_details.model}}</h3></div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="row card-margin-bot">
+                        <div class="col-md"><h3>Serial number:</h3></div>
+                        <div class="col-md"><h3>{{airplane_details.serialnumber}}</h3></div>
+                    </div>
+                    <div class="row card-margin-bot">
+                        <div class="col-md"><h3>Operator:</h3></div>
+                        <div class="col-md"><h3>{{airplane_details.operator}}</h3></div>
+                    </div>
+                    <div class="row card-margin-bot">
+                        <div class="col-md"><h3>Owner:</h3></div>
+                        <div class="col-md"><h3>{{airplane_details.owner}}</h3></div>
+                    </div>
+                    <div class="row card-margin-bot">
+                        <div class="col-md"><h3>Category:</h3></div>
+                        <div class="col-md"><h3>{{airplane_details.categoryDescription}}</h3></div>
+                    </div>
+
+                </div>
+            </div>
+        {% else %}
+            <h1 class="red-mes">Lack of aircraft information</h1>
+        {% endif %}
+    </div>
+</div>
