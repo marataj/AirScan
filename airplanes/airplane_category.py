@@ -1,4 +1,5 @@
 airplane_categories={
+    -1: "All",
     0 : "No info", 
     1 : "No Category Info",
     2 : "Light", 

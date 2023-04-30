@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block title %}Scanner{% endblock title %}
 {% block head %}<link rel="stylesheet" href={% static 'scanner/css/style.css' %}>{% endblock head %}
 {% block content %}
@@ -9,16 +10,27 @@
             {{html|safe}}
         </div>
         <div class="container position-absolute top-0 end-0 bg-dark right-menu">
-            <form action="{% url 'scanning_page' %}" method="POST" id="scanning_form">
+            <form action="{% url 'scanning_page' %}" method="POST" id="scanning_form" class="form-padding">
                 {% csrf_token %}
                 <input type="hidden" id="scanning_area" name = "scanning_area">
                 <input type="hidden" id="map_info" name = "map_info">
+                <div class="inner-form">
+                    <button class="form-control submit-btn" type="button" id="submit_scanner">Scan</button>
+                    <label for="category">Aircraft category:</label>
+                    <select name="category" id="category">
+                        {% for k, v in categories.items %}
+                            <option {% if selected_category == k%}selected{% endif %}
+                                value="{{k}}">{{v}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
             </form>
-            <button class="form-control submit-button" type="button" id="submit_scanner">Scan</button>
+
             {% for flight in flights_list %}
-            {% include "state_vector.html" with flight=flight%}
+                {% include "state_vector.html" with flight=flight%}
             {% endfor %}
-            
+
         </div>
     </div>
 {% endblock content %}
