@@ -220,7 +220,7 @@ def add_airport_marker(
         Map with new marker added.
     """
     popup = f"""
-    <a href="airport/{ident}" target="_blank">
+    <a href="/airports/airport/{ident}" target="_blank">
         {popup_msg}
     </a>
     """
