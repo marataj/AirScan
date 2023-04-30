@@ -36,7 +36,6 @@ class ScannerView(View):
         areas = json.loads(request.POST["scanning_area"])
         map_info = json.loads(request.POST["map_info"])
         selected_category = int(request.POST["category"])
-        print(f"CATEGORY -------> {selected_category}")
         flights = open_sky.get_states(bbox=bbox_parse(areas))
         map, _ = generate_generic_map(
             map_info["lat"], map_info["lng"], map_info["zoom"]

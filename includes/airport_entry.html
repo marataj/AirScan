@@ -1,0 +1,20 @@
+{% load airplane_extras %}
+<div class="container state-vector">
+    <div class="row">
+        <div class="col-sm">
+            <h6>{{airport.name}}
+                {% if airport.municipality %}
+                    | {{airport.municipality}}
+                {% endif %}</h6>
+            <p>Ident: {{airport.ident}}</p>
+            <p>Type: {{airport.type|upper}}</p>
+        </div>
+        <div class="col-sm">
+            <p>Latitude: {{airport.latitude_deg}}</p>
+            <p>Longitude: {{airport.longitude_deg}}</p>
+
+        </div>
+    </div>
+    <button class="btn-light" onclick="change_map_center({{airport.latitude_deg}}, {{airport.longitude_deg}}, 12)">Position</button>
+    <button class="btn-light"><a href="{{airport.get_absolute_url}}">Details</a></button>
+</div>
