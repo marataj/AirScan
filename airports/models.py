@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.urls import reverse
 
@@ -12,7 +14,7 @@ class AirportsModel(models.Model):
 
     # TODO replace hardcoding with parameters
     class Meta:
-        db_table = "airports_db"
+        db_table = str(os.getenv("AIRPORTSMODEL_TABLE_NAME"))
 
     ident = models.CharField(max_length=50, primary_key=True)
     type = models.CharField(max_length=50)

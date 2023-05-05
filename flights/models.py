@@ -1,10 +1,13 @@
+import os
+
 from django.db import models
 
 # Create your models here.
 
+
 class DestinationsModel(models.Model):
     class Meta:
-        db_table = "destinations_db"
+        db_table = str(os.getenv("DESTINATIONSMODEL_TABLE_NAME"))
 
     callsign = models.CharField(max_length=10, primary_key=True)
     origin = models.CharField(max_length=15)

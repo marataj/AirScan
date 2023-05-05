@@ -1,7 +1,8 @@
+import os
 from typing import List
-from django.urls import reverse
 
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -13,9 +14,8 @@ class AirplaneModel(models.Model):
 
     """
 
-    # TODO replace hardcoding with global parameters
     class Meta:
-        db_table = "airplanes_db"
+        db_table = str(os.getenv("AIRPLANEMODEL_TABLE_NAME"))
 
     icao24 = models.CharField(max_length=10, primary_key=True)
     registration = models.CharField(max_length=20)
@@ -31,7 +31,6 @@ class AirplaneModel(models.Model):
 
     def get_absolute_url(self):
         return reverse("aircraft_details", kwargs={"pk": self.icao24})
-    
 
     @classmethod
     def get_fields_names(cls) -> List[str]:
