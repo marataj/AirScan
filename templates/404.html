@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}404{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href={% static 'scanner/css/style.css' %}>
+{% endblock head %}
+{% block content %}
+<img src="{% static 'images/no_image.png' %}" alt="" >
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static '\scanner\js\get_geojson.js' %}"></script>
+{% endblock script %}
