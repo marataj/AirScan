@@ -1,13 +1,12 @@
 .right-menu {
-    height: 94vh; 
-    width: 40vh; 
+    height: 98vh; 
+    width: 50vh; 
     margin: 5px; 
     padding-left: 10px; 
     padding-right: 10px; 
     opacity: 0.9; 
     border-radius: 10px; 
-    overflow-y: auto;
-    scrollbar-width: 0px;
+    overflow-y: hidden;
 }
 
 .map-container {
@@ -15,7 +14,17 @@
     padding-left: 8px;
 }
 .right-menu::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+    display: none;  
+}
+.scrollable{
+    overflow-y: auto;
+    scrollbar-width: 0px;
+    height: 100%;
+
+}
+
+.scrollable::-webkit-scrollbar { 
+    display: none;  
 }
 
 .submit-btn{
@@ -32,4 +41,11 @@
     background-color: #7a8692;
     border-radius: 10px; 
     opacity: 0.9; 
+}
+.collapsible {
+    
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+      
 }

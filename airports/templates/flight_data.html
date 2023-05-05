@@ -1,0 +1,16 @@
+{% load airports_extras %}
+<div class="container flight-data-card">
+    <div class="row">
+        <div class="col-sm">
+            <p>Aircraft no.: {{flight.icao24}}</p>
+            <p>From: {{flight.estDepartureAirport}}</p>
+            <p>At: {{flight.firstSeen|timestamp_to_datetime}}</p>
+        </div>
+        <div class="col-sm">
+            <p>Callsign: {{flight.callsign}}</p>
+            <p>To: {{flight.estArrivalAirport}}</p>
+            <p>At: {{flight.lastSeen|timestamp_to_datetime}}</p>
+        </div>
+    </div>
+    {% comment %} <button class="btn-light" onclick="change_map_center({{flight.latitude}}, {{flight.longitude}}, 12)">Position</button> {% endcomment %}
+</div>

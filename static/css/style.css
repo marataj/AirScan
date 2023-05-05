@@ -15,6 +15,7 @@ body {
 
 .state-vector p {
     margin: 0px;
+    font-size: medium;
 }
 div.state-vector:hover{
     background-color: rgba(169, 149, 250, 0.438);

@@ -89,13 +89,21 @@ class AirportsView(View):
 
 
 class AirportDetailsView(DetailView):
+    """
+    Class representing the detail view of Airports Model.
+
+    """
+
     template_name = "airport_details.html"
     model = AirportsModel
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         map, _ = generate_generic_map(
-            self.object.latitude_deg, self.object.longitude_deg, zoom=12, draw=False
+            self.object.latitude_deg,
+            self.object.longitude_deg + 0.1,
+            zoom=12,
+            draw=False,
         )
         map = add_airport_marker(
             map,
@@ -164,6 +172,7 @@ class AirportDetailsView(DetailView):
                     weight=1,
                     opacity=1,
                 ).add_to(map)
+                context["flights"] = data
             map.render()
             map_html = map._repr_html_()
             context["html"] = map_html

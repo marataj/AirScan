@@ -9,30 +9,34 @@
             {{html|safe}}
         </div>
     </div>
-    <div class="container position-absolute top-0 end-0 bg-dark right-menu">
-        
-                <form action="{% url 'airports_map' %}" method="POST" id="scanning_form" style="padding: 10px;">
-                {% csrf_token %}
-                <input type="hidden" id="scanning_area" name = "scanning_area">
-                <input type="hidden" id="map_info" name = "map_info">
-                <div class="inner-form">
-                    <button class="form-control submit-btn" type="button" id="submit_scanner">Scan</button>
-                    <label for="category">Airport category:</label>
-                    <select name="category" id="category">
-                        
-                        {% for category in categories %}
-                            <option {% if selected_category == category%}selected{% endif %}
-                                value="{{category}}">{{category|upper}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </form>
-       
-       
-        {% for airport in airports_list %}
-        {% include "airport_entry.html" with airport=airport%}
-        {% endfor %}
-        
+    <div class="container position-absolute top-0 end-0 bg-dark airport-right-menu">
+
+        <form action="{% url 'airports_map' %}" method="POST" id="scanning_form" style="padding: 10px;">
+            {% csrf_token %}
+            <input type="hidden" id="scanning_area" name = "scanning_area">
+            <input type="hidden" id="map_info" name = "map_info">
+            <div class="inner-form">
+                <button class="form-control submit-btn" type="button" id="submit_scanner">Scan</button>
+                <label for="category">Airport category:</label>
+                <select name="category" id="category">
+
+                    {% for category in categories %}
+                        <option {% if selected_category == category%}selected{% endif %}
+                            value="{{category}}">{{category|upper}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+
+        <h3 style="color: white;">Results ({{airports_list|length}}):</h3>
+        <div class="scrollable">
+            {% for airport in airports_list %}
+                {% include "airport_entry.html" with airport=airport%}
+            {% endfor %}
+
+        </div>
+
+
     </div>
 {% endblock content %}
 

@@ -15,21 +15,36 @@
                 <input type="hidden" id="scanning_area" name = "scanning_area">
                 <input type="hidden" id="map_info" name = "map_info">
                 <div class="inner-form">
-                    <button class="form-control submit-btn" type="button" id="submit_scanner">Scan</button>
-                    <label for="category">Aircraft category:</label>
-                    <select name="category" id="category">
-                        {% for k, v in categories.items %}
-                            <option {% if selected_category == k%}selected{% endif %}
-                                value="{{k}}">{{v}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <button class="form-control submit-btn" type="button" id="submit_scanner">Scan</button>
+                            <label for="category">Aircraft category:</label>
+                            <select name="category" id="category">
+                                {% for k, v in categories.items %}
+                                    <option {% if selected_category == k%}selected{% endif %}
+                                        value="{{k}}">{{v}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="collapse-trigger">col</button>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </form>
+            <h3 style="color: white;">Results({{flights_list|length}}):</h3>
+            <h3 style="color: white;">Stats</h3>
+            <div class="scrollable">
+                {% for flight in flights_list %}
+                    {% include "state_vector.html" with flight=flight%}
+                {% endfor %}
+            </div>
 
-            {% for flight in flights_list %}
-                {% include "state_vector.html" with flight=flight%}
-            {% endfor %}
+
+
 
         </div>
     </div>

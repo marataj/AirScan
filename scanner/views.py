@@ -5,9 +5,9 @@ from django.shortcuts import render
 from django.views import View
 from opensky_api import OpenSkyApi
 
+from airplanes.airplane_category import airplane_categories
 from flights.models import DestinationsModel
 from utils.map_utils import add_plane_marker, bbox_parse, generate_generic_map
-from airplanes.airplane_category import airplane_categories
 
 # Create your views here.
 
@@ -27,8 +27,7 @@ class ScannerView(View):
         return render(
             request,
             "scanner.html",
-            {"html": map_html,
-             "categories": airplane_categories},
+            {"html": map_html, "categories": airplane_categories},
         )
 
     def post(self, request):
@@ -40,8 +39,8 @@ class ScannerView(View):
         map, _ = generate_generic_map(
             map_info["lat"], map_info["lng"], map_info["zoom"]
         )
-        filtered_flights=[]
-        for flight in flights.states:
+        filtered_flights = []
+        for flight in getattr(flights, "states", []):
             if flight.category != selected_category and selected_category != -1:
                 continue
             dest = DestinationsModel.objects.filter(
@@ -53,7 +52,6 @@ class ScannerView(View):
                 map, flight.latitude, flight.longitude, flight.true_track, flight.icao24
             )
             filtered_flights.append(flight)
-        
 
         map.render()
         map_html = map._repr_html_()
@@ -61,5 +59,10 @@ class ScannerView(View):
         return render(
             request,
             "scanner.html",
-            {"html": map_html, "categories": airplane_categories, "selected_category": selected_category,"flights_list": filtered_flights},
+            {
+                "html": map_html,
+                "categories": airplane_categories,
+                "selected_category": selected_category,
+                "flights_list": filtered_flights,
+            },
         )

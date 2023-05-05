@@ -6,61 +6,73 @@
         | {{object.municipality}}
     {% endif %}{% endblock title %}
 {% block head %}
-    <link rel="stylesheet" href={% static 'scanner/css/style.css' %}>
+    <link rel="stylesheet" href={% static 'airports/css/style.css' %}>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" />
 {% endblock head %}
 {% block content %}
-    <div class="data-card" style="margin: 10px;">
-        <div class="row">
+    <div class="row">
+        <div class="col-md-12 map-container">
+            {{html|safe}}
+        </div>
 
-            <div class="col-md-4" style="padding: 30px;">
-                <h1>{{object.name}}
+        <div class="container position-absolute top-0 end-0 bg-dark airport-right-menu">
+            <div style="color: white;">
+                <h2>{{object.name}}
                     {% if object.municipality %}
                         | {{object.municipality}}
-                    {% endif %}</h1>
+                    {% endif %}</h2>
                 <h3>{{object.ident}}</h3>
                 <hr>
                 <div class="row">
-                    <div class="col-md-6"><h3>Type:</h3></div>
-                    <div class="col-md-6"><h3>{{object.type|upper}}</h3></div>
+                    <div class="col-md-6"><h5>Type:</h5></div>
+                    <div class="col-md-6"><h5>{{object.type|upper}}</h5></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6"><h3>Latitude:</h3></div>
-                    <div class="col-md-6"><h3>{{object.latitude_deg}}</h3></div>
+                    <div class="col-md-6"><h5>Latitude:</h5></div>
+                    <div class="col-md-6"><h5>{{object.latitude_deg}}</h5></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6"><h3>Longitude:</h3></div>
-                    <div class="col-md-6"><h3>{{object.longitude_deg}}</h3></div>
+                    <div class="col-md-6"><h5>Longitude:</h5></div>
+                    <div class="col-md-6"><h5>{{object.longitude_deg}}</h5></div>
                 </div>
-            </div>
-            <div class="col-md-8" style="padding: 30px;">
-                {{html|safe}}
-            </div>
-        </div>
-        <div class="row">
 
-            <div class="col-md-4" style="padding: 30px;">
                 {% if object.home_link %}
-                    <h2><a href="{{object.home_link}}">Airport home page</a></h2>
+                    <h5><a href="{{object.home_link}}">Airport home page</a></h5>
                 {% endif %}
 
                 {% if object.wikipedia_link%}
-                    <h3><a href="{{object.wikipedia_link}}">Wikipedia page</a></h3>
+                    <h5><a href="{{object.wikipedia_link}}">Wikipedia page</a></h5>
                 {% endif %}
-
+                <hr style="color: white;">
             </div>
-            <div class="col-md-8" style="padding: 30px; {% if form.errors %} color: red;{% endif %}">
+
+            <div class="inner-form" style="{% if form.errors %} color: red;{% endif %}">
                 <form method="POST">
                     {% csrf_token %}
-                    {{form}}
-                    <button type="submit">Generate routes</button>
+                    <h5>Flights scann</h5>
+                    <div >
+                        {{form}}
+                    </div>
+                    <button type="submit" class="btn-light" style="margin-top: 3px;">Scan flights</button>
+
+
                 </form>
 
             </div>
+            <hr>
+            <h3 style="color: white;">Results({{flights|length}}):</h3>
+            <h3 style="color: white;">Stats</h3>
+            <div class="scrollable">
+                {% for flight in flights  %}
+                    {% include "flight_data.html" with flight=flight %}
+                {% endfor %}
+            </div>
+
         </div>
+
     </div>
 
 {% endblock content %}
