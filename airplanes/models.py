@@ -1,4 +1,5 @@
 from typing import List
+from django.urls import reverse
 
 from django.db import models
 
@@ -27,6 +28,10 @@ class AirplaneModel(models.Model):
 
     def __str__(self) -> str:
         return f"Model:{self.manufacturername}: {self.model}. Owner: {self.owner}"
+
+    def get_absolute_url(self):
+        return reverse("aircraft_details", kwargs={"pk": self.icao24})
+    
 
     @classmethod
     def get_fields_names(cls) -> List[str]:

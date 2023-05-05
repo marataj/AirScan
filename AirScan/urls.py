@@ -21,5 +21,6 @@ urlpatterns = [
     path("", include("home.urls")),
     path("scanner/", include("scanner.urls")),
     path("airports/", include("airports.urls")),
-    path("flights/", include("flights.urls"))
+    path("flights/", include("flights.urls")),
+    path("aircrafts/",include("airplanes.urls"))
 ]

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Airplane {{object.icao24}} details{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href={% static 'scanner/css/style.css' %}>
+
+{% endblock head %}
+{% block content %}
+
+    <div style="width: 50%; margin:auto">
+        {% include "airplane_card.html" with photo=photo airplane_details=object%}
+    </div>
+
+
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

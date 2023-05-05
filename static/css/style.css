@@ -1,3 +1,6 @@
+.nav-link {
+    margin-left: 35px;
+}
 .nav-link:hover{
     background-color: rgba(38, 9, 204, 0.438);
 }
@@ -23,7 +26,7 @@ div.state-vector:hover{
 
 .data-card {
     border-radius: 40px; 
-    height: 96vh; 
+    height: 98vh; 
     background-color: rgba(193, 181, 242, 0.438);
 }
 
