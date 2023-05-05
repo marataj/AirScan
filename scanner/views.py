@@ -31,6 +31,13 @@ class ScannerView(View):
         )
 
     def post(self, request):
+        if request.POST["scanning_area"] == "[]":
+            _, map_html = generate_generic_map()
+            return render(
+                request,
+                "scanner.html",
+                {"html": map_html, "categories": airplane_categories},
+            )
         open_sky = OpenSkyApi(OPENSKY_USERNAME, OPENSKY_PASSWORD)
         areas = json.loads(request.POST["scanning_area"])
         map_info = json.loads(request.POST["map_info"])

@@ -24,7 +24,7 @@ class AirportsView(View):
 
     def get(self, request):
         map, _ = generate_generic_map()
-        selected_category = "large_airport"
+        selected_category = "All"
         for airport in AirportsModel.objects.filter(type=selected_category):
             map = add_airport_marker(
                 map, airport.latitude_deg, airport.longitude_deg, airport, airport.ident
@@ -35,7 +35,6 @@ class AirportsView(View):
         categories = AirportsModel.objects.values_list("type", flat=True).distinct()
         categories = list(categories)
         categories.append("All")
-        print(categories)
         return render(
             request,
             "airports.html",
@@ -47,6 +46,23 @@ class AirportsView(View):
         )
 
     def post(self, request):
+        if request.POST["scanning_area"] == "[]":
+            map, _ = generate_generic_map()
+            map.render()
+            map_html = map._repr_html_()
+            categories = AirportsModel.objects.values_list("type", flat=True).distinct()
+            categories = list(categories)
+            categories.append("All")
+            return render(
+                request,
+                "airports.html",
+                {
+                    "html": map_html,
+                    "categories": categories,
+                    "selected_category": "All",
+                },
+            )
+
         areas = json.loads(request.POST["scanning_area"])
         map_info = json.loads(request.POST["map_info"])
         selected_category = request.POST["category"]
