@@ -1,7 +1,10 @@
+import os
 from pathlib import Path
 
 import pandas as pd
 from django.core.management.base import BaseCommand, CommandParser
+
+from AirScan.settings import BASE_DIR, DB_CONNECTION_STRING
 
 
 class Command(BaseCommand):
@@ -12,7 +15,10 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument(
-            "path", type=str, help="Path to the csv file with airports data"
+            "path",
+            type=str,
+            help="Path to the csv file with airports data",
+            default=Path(BASE_DIR, "airports/db_initial/airports_database.csv"),
         )
 
     def push_records(self, file_path: Path) -> None:
@@ -46,8 +52,8 @@ class Command(BaseCommand):
         airports_frame.drop(axis=1, labels=["id", "scheduled_service"], inplace=True)
         # TODO: replace hardcoding with global parameters
         airports_frame.to_sql(
-            "airports_db",
-            "postgresql://postgres:root@localhost/airscan",
+            os.getenv("AIRPORTSMODEL_TABLE_NAME"),
+            DB_CONNECTION_STRING,
             if_exists="replace",
             index=False,
         )

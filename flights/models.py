@@ -6,6 +6,10 @@ from django.db import models
 
 
 class DestinationsModel(models.Model):
+    """
+    Class representing model contains data about flights destinations.
+
+    """
     class Meta:
         db_table = str(os.getenv("DESTINATIONSMODEL_TABLE_NAME"))
 

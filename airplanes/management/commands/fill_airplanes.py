@@ -1,8 +1,11 @@
+import os
 from pathlib import Path
 from typing import Any, Optional
 
 import pandas as pd
 from django.core.management.base import BaseCommand, CommandParser
+
+from AirScan.settings import BASE_DIR, DB_CONNECTION_STRING
 
 from ...models import AirplaneModel
 
@@ -10,7 +13,10 @@ from ...models import AirplaneModel
 class Command(BaseCommand):
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument(
-            "path", type=str, help="Path to the csv file with airports data"
+            "path",
+            type=str,
+            help="Path to the csv file with airports data",
+            default=Path(BASE_DIR, "airplanes/db_initial/aircrafts_database.csv"),
         )
 
     # TODO: put the input files in the specific place in the docker container, base command on that file
@@ -48,8 +54,8 @@ class Command(BaseCommand):
 
         # TODO: replace hardcoding with global parameters
         airplanes.to_sql(
-            "airplanes_db",
-            "postgresql://postgres:root@localhost/airscan",
+            os.getenv("AIRPLANEMODEL_TABLE_NAME"),
+            DB_CONNECTION_STRING,
             if_exists="replace",
             index=False,
         )
