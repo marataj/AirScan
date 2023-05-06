@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create new user{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href={% static 'user/css/style.css' %}>
+
+
+{% endblock head %}
+{% block content %}
+
+    <form method="post">
+
+        <div class="bg-dark user-form" style="color: white;">
+            {% csrf_token %}
+            <h3>{{user_creation_form.username.label}}:
+                {{user_creation_form.username}}</h3>
+            <h5>{{user_creation_form.username.help_text}}</h5>
+            <hr>
+            <h3>{{user_creation_form.password1.label}}:
+                {{user_creation_form.password1}}</h3>
+            <h5>{{user_creation_form.password1.help_text}}</h5>
+            <hr>
+            <h3>{{user_creation_form.password2.label}}:
+                {{user_creation_form.password2}}</h3>
+            <h5>{{user_creation_form.password2.help_text}}</h5>
+            <hr>
+            <div style="align-content: center;">
+                <button type="submit" class="form-control">Create user</button>
+            </div>
+
+        </div>
+        {% if user_creation_form.errors %}
+            <h3 style="text-align: center; color: darkred;">The usaername or password does not meet the requirements.</h3>
+        {% endif %}
+    </form>
+
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

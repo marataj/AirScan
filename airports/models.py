@@ -12,7 +12,6 @@ class AirportsModel(models.Model):
 
     """
 
-    # TODO replace hardcoding with parameters
     class Meta:
         db_table = str(os.getenv("AIRPORTSMODEL_TABLE_NAME"))
 

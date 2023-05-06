@@ -46,6 +46,22 @@
                 {% if object.wikipedia_link%}
                     <h5><a href="{{object.wikipedia_link}}">Wikipedia page</a></h5>
                 {% endif %}
+                {% if user.is_authenticated and not favorite %}
+                    <form action="{% url 'add_to_favorites' %}" method="post">
+                        {% csrf_token %}
+                        <input name="icao24" type="hidden" value="{{object.ident}}">
+                        <input name="type" type="hidden" value="airport">
+                        <button class="btn-light" type="submit" style="width: fit-content;">Add to favorites</button>
+                    </form>
+                {% endif %}
+                {% if favorite %}
+                    <form action="{% url 'delete_from_favorites' %}" method="post">
+                        {% csrf_token %}
+                        <input name="icao24" type="hidden" value="{{object.ident}}">
+                        <input name="type" type="hidden" value="airport">
+                        <button class="btn-light" type="submit" style="width: fit-content;">Remove from favorites</button>
+                    </form>
+                {% endif %}
                 <hr style="color: white;">
             </div>
 

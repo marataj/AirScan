@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="data-card">
-    <h1 style="text-align: center;">{{airplane_details.manufacturername}}: {{airplane_details.model}}</h1>
+    <h1 style="text-align: center;">{{airplane_details.manufacturername}} {{airplane_details.model}}</h1>
     <div class="row" style="padding: 20px;">
         {% if photo %}
             <img src="{{photo}}" alt="Plane" style="height: 550px; width:auto; margin-left: auto; margin-right: auto;" class="center">
@@ -54,6 +54,22 @@
                     </div>
 
                 </div>
+                {% if user.is_authenticated and not favorite %}
+                    <form action="{% url 'add_to_favorites' %}" method="post">
+                        {% csrf_token %}
+                        <input name="icao24" type="hidden" value="{{airplane_details.icao24}}">
+                        <input name="type" type="hidden" value="airplane">
+                        <button class="btn-light" type="submit" style="width: fit-content;">Add to favorites</button>
+                    </form>
+                {% endif %}
+                {% if favorite %}
+                    <form action="{% url 'delete_from_favorites' %}" method="post">
+                        {% csrf_token %}
+                        <input name="icao24" type="hidden" value="{{airplane_details.icao24}}">
+                        <input name="type" type="hidden" value="airplane">
+                        <button class="btn-light" type="submit" style="width: fit-content;">Remove from favorites</button>
+                    </form>
+                {% endif %}
             </div>
         {% else %}
             <h1 class="red-mes">Lack of aircraft information</h1>

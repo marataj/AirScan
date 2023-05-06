@@ -4,6 +4,7 @@ from folium import PolyLine
 
 from airplanes.models import AirplaneModel
 from airports.models import AirportsModel
+from favorites.models import FavoritesListModel
 from utils.general_tools import json_to_dict_parse
 from utils.map_utils import add_airport_marker, add_plane_marker, generate_generic_map
 from utils.planespotters_api import get_airplane_photo_url
@@ -41,14 +42,14 @@ class FlightView(View):
                 origin_airport.latitude_deg,
                 origin_airport.longitude_deg,
                 origin_airport.municipality,
-                origin_airport.ident
+                origin_airport.ident,
             )
             map = add_airport_marker(
                 map,
                 destination_airport.latitude_deg,
                 destination_airport.longitude_deg,
                 destination_airport.municipality,
-                destination_airport.ident
+                destination_airport.ident,
             )
             PolyLine(
                 [
@@ -82,5 +83,11 @@ class FlightView(View):
                 else None,
                 "origin_airport": origin_airport,
                 "destination_airport": destination_airport,
+                "favorite": len(
+                    FavoritesListModel.objects.filter(
+                        user_name=request.user.username, icao24=flight.icao24
+                    )
+                )
+                == 1,
             },
         )

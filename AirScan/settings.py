@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     'home',
     "airports",
     "airplanes",
-    "flights"
+    "flights",
+    "user",
+    "favorites"
 ]
 
 MIDDLEWARE = [

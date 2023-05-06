@@ -6,7 +6,7 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
+        <li>
             <a href="{% url 'scanning_page' %}" class="nav-link text-white" aria-current="page">
                 Scaner
             </a>
@@ -23,14 +23,37 @@
         </li>
         <li>
             <a href="#" class="nav-link text-white">
-                Favorites
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link text-white">
                 About
             </a>
         </li>
+        <hr>
+        {% if user.is_authenticated %}
+
+            <p class="nav-item" style="color: blue;"> Logged as {{user.username}}</p>
+
+            <li>
+                <a href="{% url 'favorites' %}" class="nav-link text-white">
+                    Favorites
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}" class="nav-link text-white">
+                    Logout
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'user_creation' %}" class="nav-link text-white">
+                    Register
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'login' %}" class="nav-link text-white">
+                    Login
+                </a>
+            </li>
+        {% endif %}
+
     </ul>
     <hr>
     <p style="font-size:x-small;">Created by MR</p>

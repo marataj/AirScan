@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import DetailView
 
+from favorites.models import FavoritesListModel
 from utils.planespotters_api import get_airplane_photo_url
 
 from .forms import AircraftForm
@@ -47,4 +48,20 @@ class AircraftDetailView(DetailView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["photo"] = get_airplane_photo_url(self.object.icao24)
+        context["favorite"] = (
+            len(
+                FavoritesListModel.objects.filter(
+                    user_name=self.request.user.username, icao24=self.object.icao24
+                )
+            )
+            == 1
+        )
+        print(
+            len(
+                FavoritesListModel.objects.filter(
+                    user_name=self.request.user.username, icao24=self.object.icao24
+                )
+            )
+            == 1
+        )
         return context

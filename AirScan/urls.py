@@ -22,5 +22,7 @@ urlpatterns = [
     path("scanner/", include("scanner.urls")),
     path("airports/", include("airports.urls")),
     path("flights/", include("flights.urls")),
-    path("aircrafts/",include("airplanes.urls"))
+    path("aircrafts/",include("airplanes.urls")),
+    path("user/",include("user.urls")),
+    path("favorites/",include("favorites.urls")),
 ]

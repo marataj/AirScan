@@ -7,9 +7,8 @@
 
 {% endblock head %}
 {% block content %}
-
     <div style="width: 50%; margin:auto">
-        {% include "airplane_card.html" with photo=photo airplane_details=object%}
+        {% include "airplane_card.html" with photo=photo airplane_details=object favorite=favorite%}
     </div>
 
 

@@ -1,0 +1,16 @@
+{% load airplane_extras %}
+<div class="container state-vector">
+    <div class="row">
+        <div class="col-sm">
+            <h6>{{aircraft.manufacturername}} | {{aircraft.model}}</h6>
+            <p>Registration: {{aircraft.registration}}</p>
+            <p>Type: {{aircraft.categoryDescription}}</p>
+        </div>
+        <div class="col-sm">
+            <p>Operator: {{aircraft.operator}}</p>
+            <p>Owner: {{aircraft.owner}}</p>
+
+        </div>
+    </div>
+    <button class="btn-light"><a href="{{aircraft.get_absolute_url}}">Details</a></button>
+</div>

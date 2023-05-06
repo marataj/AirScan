@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Favorites{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href={% static 'airports/css/style.css' %}>
+{% endblock head %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12 map-container">
+            {{html|safe}}
+        </div>
+        <div class="col-md" style="align-content: center;">
+            <div class="container position-absolute top-0 end-0 bg-dark airport-right-menu">
+                <div class="row" style="height: 45%;">
+                    <h3 style="color: white;">Favorites airports ({{airports_list|length}}):</h3>
+                    <div class="scrollable">
+                        {% for airport in airports_list %}
+                            {% include "airport_entry.html" with airport=airport%}
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="row" style="height: 45%;">
+                    <div style="margin-top: 50px;"><h3 style="color: white;">Favorites aircrafts ({{aircrafts_list|length}}):</h3></div>
+                    <div class="scrollable">
+                        {% for aircraft in aircrafts_list %}
+                            {% include "aircraft_entry.html" with aircraft=aircraft%}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static '\scanner\js\get_geojson.js' %}"></script>
+{% endblock script %}
+

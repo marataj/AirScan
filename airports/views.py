@@ -7,6 +7,7 @@ from django.views.generic import DetailView
 from folium import PolyLine
 from opensky_api import FlightData, OpenSkyApi
 
+from favorites.models import FavoritesListModel
 from utils.map_utils import add_airport_marker, bbox_parse, generate_generic_map
 
 from .forms import AirportFlightsForm
@@ -133,6 +134,14 @@ class AirportDetailsView(DetailView):
         context["raw_map"] = map
         context["html"] = map_html
         context["form"] = AirportFlightsForm()
+        context["favorite"] = (
+            len(
+                FavoritesListModel.objects.filter(
+                    user_name=self.request.user.username, icao24=self.object.ident
+                )
+            )
+            == 1
+        )
         return context
 
     def post(self, request, *args, **kwargs):
