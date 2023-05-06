@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -54,6 +55,11 @@ def add(request):
             icao24=request.POST["icao24"],
             record_type=request.POST["type"],
         ).save()
+        messages.success(
+            request,
+            f"{request.POST['type'].capitalize()} {request.POST['icao24']} added to favorites!",
+            extra_tags="success",
+        )
         return HttpResponseRedirect(request.META.get("HTTP_REFERER"), request.POST)
 
 
@@ -65,4 +71,9 @@ def delete(request):
     if request.method == "POST":
         favorite = request.POST["icao24"]
         FavoritesListModel.objects.filter(icao24=request.POST["icao24"]).delete()
+        messages.warning(
+            request,
+            f"{request.POST['icao24']} removed from favorites!",
+            extra_tags="warning",
+        )
         return HttpResponseRedirect(request.META.get("HTTP_REFERER"), request.POST)

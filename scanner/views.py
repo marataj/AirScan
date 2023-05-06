@@ -1,6 +1,7 @@
 import json
 import os
 
+from django.contrib import messages
 from django.shortcuts import render
 from django.views import View
 from opensky_api import OpenSkyApi
@@ -24,6 +25,11 @@ class ScannerView(View):
 
     def get(self, request):
         _, map_html = generate_generic_map()
+        messages.info(
+            request,
+            "Draw the scanned area using the square icon in the upper left corner of the map. Then select a category and hit the Scan button.",
+            extra_tags="info",
+        )
         return render(
             request,
             "scanner.html",
