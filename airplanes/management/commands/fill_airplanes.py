@@ -19,7 +19,6 @@ class Command(BaseCommand):
             default=Path(BASE_DIR, "airplanes/db_initial/aircrafts_database.csv"),
         )
 
-    # TODO: put the input files in the specific place in the docker container, base command on that file
     def push_records(self, file_path: Path) -> None:
         """
         Function responsible for filling the initial records of the airplanes table in DB from specific csv file.
@@ -52,7 +51,6 @@ class Command(BaseCommand):
         airplanes.owner = airplanes.owner.astype("category")
         airplanes.dropna(subset=["icao24"], axis=0)
 
-        # TODO: replace hardcoding with global parameters
         airplanes.to_sql(
             os.getenv("AIRPLANEMODEL_TABLE_NAME"),
             DB_CONNECTION_STRING,

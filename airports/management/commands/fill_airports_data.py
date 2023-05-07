@@ -50,7 +50,6 @@ class Command(BaseCommand):
             subset=["latitude_deg", "longitude_deg", "ident"], axis=0, inplace=True
         )
         airports_frame.drop(axis=1, labels=["id", "scheduled_service"], inplace=True)
-        # TODO: replace hardcoding with global parameters
         airports_frame.to_sql(
             os.getenv("AIRPORTSMODEL_TABLE_NAME"),
             DB_CONNECTION_STRING,

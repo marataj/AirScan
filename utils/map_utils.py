@@ -147,7 +147,7 @@ def generate_generic_map(
             edit_options={"edit": False},
         ).add_to(m)
     m.render()
-    html_string = m._repr_html_()  # FIXME: remove?
+    html_string = m._repr_html_()
     return m, html_string
 
 
