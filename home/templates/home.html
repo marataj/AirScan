@@ -1,39 +1,87 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Home page</h1>
-    <h2>To do:</h2>
-    <ul>
-        <li><s>Urls' name</s></li>
-        <li><s>Separate directory for the general pages</s></li>
-        <li><s>Rename the 'map' app to 'scanner'</s></li>
-        <li><s>Scan chosen areas for aircraft</s></li>
-        <li><s>Show found aircraft on the map</s></li>
-        <li><s>Show aircrafts details after click on certain card</s></li>
-        <li><s>Create postgresql db on the separate container</s></li>
-        <li><s>Connect django db engine to new database</s></li>
-        <li><s>Convert commands to add data to db directly from the pandas dataframe</s></li>
-        <li><s>Add plane markares rotation</s></li>
-        <li><s>Update database with aircraft data</s></li>
-        <li><s>Update database with airport data</s></li>
-        <li><s>Create standarized aircraft card, that is showing aircraft details</s></li>
-        <li><s>Create view with airports marked on the map</s></li>
-        <li><s>Info about airports.</s> Arrivals and departures for given airport</li>
-        <li><s>Routes of given flights</s></li>
-        <li><s>Aircraft page</s></li>
-        <li><s>Airport flights list and grapgical interpretation</s> </li>
-        <li><s>404 pag</s></li>
-        <li><s>Rename modules to django standard naming conventions (e.g. Views have ...View suffix)</s></li>
-        <li><s>Add DB credential to secrets in the dotenv file</s></li>
-        <li><s>User authentication. Favorites areas/flights/aircrafts/routes can be saved by user</s></li> 
-        <li><s>Add DB input data to repo</s></li> 
-        <hr>             
-        <li>Add docker file to DB</li>
-        <li>Review all "FIXME" and "TODO" markers</li>
-        <li>Add hint how to scan, allow user to disable hint by saving their choice in the session mechanism</li>
-        <li>Add licencing information. Add information about data sources</li>
-       
-        
-    </ul>
+    <div style="padding-left: 10px; height: 100vh; overflow: auto;">
+        <div class="row" style="margin: 50px;">
+            <h1><strong>Dear user!</strong></h1>
+
+            <h3>Welcome to the AirScan!
+                Airscan is an web application, that allows to read several types of data related to aviation.</h3>
+        </div>
+        <div class="row" style="margin: 50px;">
+            <h1>AirScan features:</h1>
+            <ul style="margin-left: 40px;">
+                <li>
+                    <h3>Scanning of selected areas in search of aircrafts that are currently there.</h3>
+
+                </li>
+                <li>
+                    <h3>Overview of information related to current flights.</h3>
+
+                </li>
+                <li>
+                    <h3>Overview of information related to aircrafts.</h3>
+
+                </li>
+                <li>
+                    <h3>Overview of information related to airports.</h3>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="row" style="margin: 50px;">
+            <div class="row">
+                <h1>Data sources</h1>
+
+            </div>
+            <div style="margin: 50px;">
+                <div class="row">
+                    <h2><a href="https://opensky-network.org/">OpenSky Network</a></h2>
+                    <h3>
+                        Flights data are provided from the <strong>OpenSky Network</strong>. The OpenSky Network provides REST API, that allows to retrieve multiple information related to aviation.
+                    </h3>
+                </div>
+                <div class="col-md">
+                    <h4><em>The OpenSky Network is a non-profit association based in Switzerland. It aims at improving the security, reliability and efficiency of the air space usage by providing open access of real-world air traffic control data to the public. The OpenSky Network consists of a multitude of sensors connected to the Internet by volunteers, industrial supporters, and academic/governmental organizations. All collected raw data is archived in a large historical database. The database is primarily used by researchers from different areas to analyze and improve air traffic control technologies and processes.
+
+                        The main technologies behind the OpenSky Network are the Automatic Dependent Surveillance-Broadcast (ADS-B) and Mode S. </em></h4>
+                </div>
+                <div class="col-md">
+                    <img src="https://opensky-network.org/images/opensky_logo.png" alt="">
+                </div>
+                <div>
+                    <h4><em>These technologies provide detailed (live) aircraft information over the publicly accessible 1090 MHz radio frequency channel.
+
+                        The OpenSky Network started in 2012 as a research project between armasuisse (Switzerland), University of Kaiserslautern (Germany), and University of Oxford (UK). In 2015, the independent OpenSky Network association was founded to guarantee the continuous development of the network towards a completely open air traffic control sensor network with worldwide coverage. Our mission remains to openly support global air traffic research on a non-profit basis as evidenced, among many other efforts, on our Social Impact page.
+
+                        Please refer to our FAQ and Terms of Use, Publications, or contact us for more information.</em></h4>
+                </div>
+            </div>
+            <hr>
+            <div style="margin: 50px">
+                <div class="row">
+                    <h2><a href="https://www.planespotters.net">Planespotters</a></h2>
+                    <h3>
+                        Photos of aircraft are provided from the  <strong>Planespotters</strong> application. The Planespotters provides REST API, that provides photos of planes.
+                    </h3>
+                    <div class="col-md" style="ali: center;">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS0AAACnCAMAAABzYfrWAAAAkFBMVEX///8eKDcAABwAAADq6usAEygMGy0AAB4ACiMADiVqbnUWIjIAACDb3N7W19oRHi/GyMp1eYBvdHtIT1lQVl+BhYpaX2gWITK9v8MGFyvNztGVmJyqrbGMj5Ti4+QAABm0trqdoaUrNEAAAAv29vcAABU9RFAzO0itr7JXXGaPk5giLDtDSVRiZ298gIajpalqfontAAAKHUlEQVR4nO2bZ7uiuhaAaaEIigWlWLCgYP///+6slQLoVrfuuTN3nnPW+2E2khCSl5RFdDSNIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIIi/gW5WY31NtRY1D1L/e+zzwBGYq6+pg40hcDbjP1+3v49zeFwL/OvX1EvABLE9//N1+/s4u9MXqYVEG7hkS/vOVs2FbCFv2qK+xSFbn/CuLYNsaW/bmpdvZfu386YtgnMOyNb7nFOy9QHF/7sCxH+eXtLFP5ZEnCyaQ/XJkp21ziX/Wg0ye3e5TKxW5vrS28SiubC4K+ZxUlNIkS2X/T8/eKz50XG3ZziaiF0Jdlri+b5pbDp1rjGmmWIetEw8xprb+QYvLLdyO0Oc1bKT4Xmu2+GN2fHEIB0loqR+6UBiMLFUqeLCStOcXH3atLZIDLOvaR3xyTtepKCZDqU46aGuYLf3nM93pMbr8aNH0Rt6qa7rHgaonVDn+A5a6rt6OKjz7X1IsC/CFsMrsPFrPxzCn5GvSwy8Rd+J+Yd0h7kjmRgbfGMo2YrPtg9tmNvqQg+eUF2KnkJ96yQ3A3eqaqm/wFJWucgc1DUszed8HH1npm87Yae61ZxEQdi0C23ZjEFTneW9Lcbremps2YNbW6mH8L61ho8sgIfgTaWtlJdqQCcp8FrXgEQbeuU8Zwyt+GwDd/Q8ccyYI2zZvMxNX9gKeSE2PknLhXyeA1mMTFZw0X3O533rEEBNQs89TXvyTHFdu7wThPm5kLbseVVB8/zdna0iEI+5saUfb2yl1yVSQUGZAx2pWqyY7pfCVjqtZpAnnMDzgXauswIS9aDQstmsgv7lR9UVZs5ZdYDjUzWbzbgtey7KtLit8FJVE/CTwi2mWHa/O7DFQ/sNHESD4zRYD5ICpiub8d5sO2f5fMCWiyqhSm5xa6sLBtbwJK3GVr5o23IW9Y1Wqc4DvbOvM4vbcixxkc8l8DEMI9sVt81a9+m6ejwRh5DRzeoywRZbwt+drwdQxUmsu9Dj4P7+7rfIqnVBpUMvjViqi25/qduJtrCC0D53cWtr6en2OBRVlLbY9Ymtiy1advD87ULYwsQSuoWlDUM96AoZrOLZ8T5DeemdrX5dprIlz57EE9AiOzz+rnVxqnRhF+Ou3OO0dTNlC59799bWNNXDvqezGX7g3UQPOy9sYb7rKdq1bJ14V+tIW3OZ6UNbUA/smmgLR8FwNBq1ohr+p6iDj/rgZ0LbumC6CqLkJvmFrU4YRwsX+pe05UOe9IktNHtuSv0dtuDu7O6rhtM2z0EULoAZRjhGvsEgSIUgP9JVL8uw3gx7d6kvbEH+ceGCJGnLPhz1IHtsK4Nn4nV/my08i7P83RCM+FRW5DBlwkwoFtZsg3MG2/zQVm8tZy4vHn9dVl/YMvBZwioeS1vpbO9DvR7a0kpYVNd1W5St3ee2vs7y8NeAwhaOiEBubdlzZcufwMJ61RbXGcwY1XWhvcmiuaOWjBwxBJ1y9mgoK1vQCzzrxhbUDh4cSMkLaet6TePoSwQhHuISbhPu1B2UrSM08DNbIoJIWraso4hKtDF0Gk9dpWzB+ihtNd/5wW3eVYV1zMsV70XF6uiKiME9P+mZ0lYPQiLvNt6CY2ijetzcFsxiBvSim+jUkI97CG0JS6u2FYAtWCP8o/aRLR6durq05e8vA1hctmKu3UFHZ+3eBbaw70pb9ffJ6Ue2+kHM3H1irXQeXfmef3naLzGWL3c7aKo9vLUFwWQOixzjLyjc1krDV5Ly9s2nbvWE4aq7ULag1NIDoeMPbXFKaUv3bfxnKZKtI3xIR80QicJy7Sa/aAt0QcU9NxVDcPdwCLZs6b4vI8+2rYuNAwDO2IfaVie0D7vGluc4zrZ+2B3on7GYh/l7IpbqY6z6ka0UyjRiZUugxpi1wwyTxpa9H7Lhr9rS+sxxPVgiPNeYPByC0/21seX7ccx4tN22BX3ozNsSdmpbS88frXVly0vwZb9ZCS+gy94rW7zUNNM+s5Wu+MaCsnXUMaI2VORQjPCdo94djuyo8taawW2Fnazff9uWNW91oWKRLauqWvafDMFBPq9t+bvRaSImurYtB9cbrYDRtK5tWV49+O7WRKEL3wQTYcs/jUaTq3oXfduW14SDfJYviilGBPXJESh01X0je2QZrOeKCCJ0neBNW91B/klAVn/7ii1pGt2ytQh0hjXHMaopWxgovLDFLUVa/Z6oNff4mS3+CZZro+7ABS4uaocLbGlHtrKFLRgfYgfgO1v9yLTnn+xR3NhqxlLLFhz60fl8hmgNM0hbfB5+YKvX56Ogh3FE0UQQt/f4oS15FsYZDmt4f/dHMgfaGqQjn9uKzzCa+OmXtopraa4r9eHQ/Gyrf346vX9va4YvhmGIMy3WVdqCDA9tTXKXbwquRejwP7WFbz5LTfMDA/ceoM/rKqRHWzCV6nfx1gtb1sE192oMLgbbXC0N1c7UnwYO39vCXhQDsudLW0X62BZuk2ET9jF/9X1sa/xLtko/xj5VQIwVt2xZhq6/uyb2Opv8ot79sokZr+RXBVPfvHt//tAW2Fjvo2iPO3rD2hYPHB7vQQR45504G90n8tc/jISTH9uC6YsvN57YlFS28Px7tpKR6U/VdLXcmaUcj4vLdvvl/flNW3EH9281zdNDviMPiyJuNitbuAGqbLEl/30rioBxGw4LjGV1/8u8BYlxVGg9aKdcUV68+UxFmdYXW0NYIldaMbD1eN+2BeP7DVvF1Td3S/nBmtrmXr4eZmcz/W7Kvzy1pcdBkNvYweW33oxvNitb0Lbals5cBPflLZhNIOyWrwR3tjAxDtduvcn/8s1HlJl8sZVAKQyCe6iOmqS5LShL2cJfPT62NXXMiXp77g4224FsM3Sx9dPg/XoWdEr21JbOv+eBF0c5KE685cqW1pq3JHx6nztyp4MHQ7e26kR9m31rS+De2uJ7EaNU7juVqlxuCzp/s2MTPLFVDVR1IHwID3K6WsVm9CLsGmzlD56Z+v3W2WFmM2b7G/4b3u1Mm23V+YGBm0XWlm2n8gL+Zdou8CTi+8R5wOzQdkp+0chlZnuFObiY6MZJcx9HfW/Zg+NIHF62qswN5Bw6DP9o1y3jsXRxdlI7TJ2oHjcjB1fJvecctGxrA2mATy5I8yftx/ChrERfssb5dth9kpGTrGqk02Q2uzaj1rrOEDiTwb+iVDzqaQWc5iJ6cIDX9hPFUuRbXMfDudSxrK+uC4bE5c19lLmiOe7VZeL32n0oZHGTOZteBtPWdtRqjA8wGY8TmKrnwJjPXePx05+356ov9TpmeqD/M/Aa6Sc7mY+3+4gHJLsfbkQTBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQf5x/AOSA7CH/r4VQAAAAAElFTkSuQmCC" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin: 50px;">
+            <h1>Contributing <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" style="height: 100px; width: auto;"> </h1>
+            <h3>
+                In case of bug finding or new feature proposition, feel free to contribute to the project in the <a href="https://github.com/marataj/AirScan">GitHub repository</a>
+            </h3>
+        </div>
+
+        <h1 style="font-size: xxx-large; text-align: center; color: green; font-weight: bolder; margin: 50px;"><a href="{% url 'scanning_page' %}" style="text-decoration: none; color: green;">Start scanning !</a></h1>
+    </div>
+
+
 {% endblock content %}
 
