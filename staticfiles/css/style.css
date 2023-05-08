@@ -1,0 +1,47 @@
+.nav-item {
+    margin-left: 50px;
+}
+.nav-link {
+    margin-left: 35px;
+}
+.nav-link:hover{
+    background-color: rgba(38, 9, 204, 0.438);
+}
+body {
+    overflow: hidden;
+}
+
+.state-vector {
+    border-radius: 5px; 
+    margin-top: 4px; 
+    font-size: small; 
+    padding: 3px;
+    background-color: rgba(234, 229, 255, 0.438);
+}
+
+.state-vector p {
+    margin: 0px;
+    font-size: medium;
+}
+div.state-vector:hover{
+    background-color: rgba(169, 149, 250, 0.438);
+}
+
+.data-card {
+    border-radius: 40px; 
+    height: 98vh; 
+    background-color: rgba(193, 181, 242, 0.438);
+}
+
+.card-padding {
+    padding-left: 20px;
+}
+
+.card-margin-bot{
+    margin-bottom: 5px;
+}
+
+.red-mes {
+    color: darkred; 
+    text-align: center;
+}

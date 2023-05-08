@@ -34,9 +34,9 @@ DB_PORT = str(os.getenv("DB_PORT"))
 DB_CONNECTION_STRING = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -141,7 +141,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR/"static"
 ]
-STATIC_ROOT = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 # Default primary key field type
