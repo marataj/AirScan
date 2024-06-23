@@ -1,7 +1,7 @@
 # AirScan 
 # ![My Skills](https://skillicons.dev/icons?i=py,django,javascript,html,bootstrap,postgresql,docker,git,github)
 
-Welcome to the AirScan! Airscan is an demo web application, that allows to read several types of data related to aviation.
+Welcome to the AirScan! Airscan is a demo web application that allows you to read several types of data related to aviation.
 
 ## Application features:
 - Scanning current flights above selected area.
