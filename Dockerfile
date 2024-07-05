@@ -16,12 +16,13 @@ RUN apk add build-base linux-headers
 
 RUN pip install -r requirements.txt 
 RUN python3 manage.py collectstatic
-RUN python3 manage.py makemigrations &&\
+RUN python3 manage.py makemigrations airplanes airports favorites flights &&\
 python3 manage.py migrate &&\
 python3 manage.py fill_destinations flights/db_initial/destinations_database.csv &&\
 python3 manage.py fill_airports_data airports/db_initial/airports_database.csv &&\
-python3 manage.py fill_airplanes airplanes/db_initial/aircrafts_database.csv &&\
-python3 manage.py runserver
+python3 manage.py fill_airplanes airplanes/db_initial/aircrafts_database.csv
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 EXPOSE 8000
 
