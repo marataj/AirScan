@@ -44,7 +44,7 @@ class Command(BaseCommand):
         if not file_path.suffix == ".csv":
             raise TypeError("File must be of type csv")
         airports_frame = pd.read_csv(file_path)
-        # Due to lot of data, only large airports were chosen to the developing stage.
+        # Due to lot of data, only large airports were chosen to the development stage.
         # airports_frame=airports_frame.loc[(airports_frame.type == "large_airport") | (airports_frame.type == "medium_airport") ....]
         airports_frame.dropna(
             subset=["latitude_deg", "longitude_deg", "ident"], axis=0, inplace=True

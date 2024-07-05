@@ -43,7 +43,7 @@ class Command(BaseCommand):
             raise TypeError("File must be of type csv")
         airplanes = pd.read_csv(
             file_path,
-            usecols=AirplaneModel.get_fields_names()[1:],
+            usecols=["icao24", "registration", "manufacturername", "model", "serialnumber", "operator", "owner", "categoryDescription"],
         )
         airplanes.categoryDescription = airplanes.categoryDescription.astype("category")
         airplanes.manufacturername = airplanes.manufacturername.astype("category")
