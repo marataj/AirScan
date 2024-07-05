@@ -31,18 +31,28 @@ Welcome to the AirScan! Airscan is a demo web application that allows you to rea
 8. User authentication and favorites list
 ![12](https://github.com/marataj/AirScan/assets/96992545/afa393f5-a73b-4313-bee2-bc5600625fc0)
 
+## Prerequisites:
+1. To run the app for the development purposes the account in the [OpenSky Network](https://opensky-network.org/) is necessary.
+2. Docker.
 
 ## How to start:
-1. Start postgresql docker container based on Dockerfile (you can edit DB password and name in Dockerfile)
-2. Build dev environment, using pip install -r requirements.txt
-3. Sing up to OpenSky Network site
-4. Complete django secret key, OpenSky Network credentials and DB settings in AirScan/.env file, which is the project config file.
-5. Use python manage.py makemigrations ; ... migrate , to setup database
-6. Use commands below to fill DB with initial data:
-    - python manage.py fill_airplanes
-    - python manage.py fill_airports_data
-    - python manage.py fill_destinations
-7. Use python manage.py runserver to run development server
+1. Fill the /.env file with the django secret-key and OpenSky Network credentials.
+2. Build the docker image based on the Dockerfile:
+
+  ```
+  docker ruild -t air-scan:latest .
+  ```
+    
+
+3. Run docker container based on the created image:
+
+  ```
+  docker run -d -p 8000:8000 air-scan
+  ``` 
+    
+
+4. The app will be served in the localhost:8000
+
 ## Data sources:
 - ### [OpenSky Network](https://opensky-network.org/)
   ![opensky_logo](https://user-images.githubusercontent.com/96992545/236922599-f49264db-301b-4e11-b430-0599bf9d3a61.png)
